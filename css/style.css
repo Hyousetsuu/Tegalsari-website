@@ -1,13 +1,14 @@
-/* File: css/style.css */
+/* File: assets/css/style.css */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* --- Hero Section (Tetap seperti sebelumnya) --- */
+/* --- Hero Section --- */
 .hero-section {
     position: relative;
-    background-color: #2b2b2b; /* Warna cadangan */
+    background-color: #2b2b2b;
     color: white;
     padding: 150px 0;
     text-align: center;
@@ -17,11 +18,9 @@ body {
 .hero-section::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../assets/bg-desa.jpg');
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Pastikan path gambar sesuai dengan folder Anda */
+    background-image: url('../../assets/bg-desa.jpg'); 
     background-size: cover;
     background-position: center;
     filter: blur(6px) brightness(0.4); 
@@ -29,66 +28,86 @@ body {
     z-index: 1;
 }
 
-.hero-section .container {
-    position: relative;
-    z-index: 2;
-}
+.hero-section .container { position: relative; z-index: 2; }
+.section-padding { padding: 60px 0; }
 
-.section-padding {
-    padding: 60px 0;
-}
-
-/* --- UPDATE BAGIAN MAPS --- */
-.map-container iframe {
-    width: 100%;
-    height: 350px; /* Tinggi dikurangi sedikit agar pas */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
+/* --- Map --- */
+.map-container iframe { width: 100%; height: 350px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
 
 /* --- Footer --- */
-footer {
-    background-color: #212529;
-    color: white;
-    padding: 30px 0;
+footer { background-color: #212529; color: white; padding: 30px 0; }
+.navbar-brand { letter-spacing: 1px; }
+
+/* --- Hover Effects --- */
+.hover-effect { transition: transform 0.3s; }
+.hover-effect:hover { transform: translateY(-5px); }
+
+/* --- Video --- */
+.video-wrapper { position: relative; z-index: 2; }
+.video-decoration { position: absolute; top: -15px; right: -15px; width: 100%; height: 100%; background-color: #198754; opacity: 0.2; border-radius: 1rem; z-index: 1; }
+.dots-decoration { position: absolute; bottom: -30px; left: -30px; color: #ffc107; font-size: 2rem; z-index: 0; }
+
+/* --- Stats Box (Kaca) --- */
+.stat-box { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); transition: transform 0.3s ease, background 0.3s; }
+.stat-box:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.5); }
+.icon-box { color: #ffc107; }
+
+/* --- SLIDER DARK MODE (COMPACT 50px) --- */
+.theme-switch { display: inline-block; height: 26px; position: relative; width: 50px; }
+.theme-switch input { display: none; }
+.slider { background-color: #87CEEB; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border: 2px solid #fff; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+.slider:before { background-color: #fff; bottom: 3px; content: ""; height: 16px; width: 16px; left: 4px; position: absolute; transition: .4s; z-index: 2; }
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }
+/* Checked State */
+input:checked + .slider { background-color: #2c3e50; border-color: #555; }
+input:checked + .slider:before { transform: translateX(24px); background-color: #f1c40f; }
+/* Icons */
+.sun-icon { position: absolute; left: 6px; top: 5px; color: #f39c12; font-size: 11px; transition: .4s; opacity: 1; }
+.moon-icon { position: absolute; right: 6px; top: 5px; color: #f1c40f; font-size: 11px; transition: .4s; opacity: 0; }
+input:checked + .slider .sun-icon { opacity: 0; transform: rotate(180deg); }
+input:checked + .slider .moon-icon { opacity: 1; transform: rotate(0deg); }
+
+/* --- DARK MODE GLOBAL --- */
+body.dark-mode { 
+    background-color: #121212; 
+    color: #e0e0e0; 
 }
 
-.navbar-brand {
-    letter-spacing: 1px;
+body.dark-mode .bg-light, 
+body.dark-mode .bg-white, 
+body.dark-mode .mode-bg { 
+    background-color: #1e1e1e !important; 
 }
 
-.hover-effect {
-    transition: transform 0.3s;
-}
-.hover-effect:hover {
-    transform: translateY(-5px);
-}
-
-/* --- Dekorasi Video --- */
-.video-wrapper {
-    position: relative;
-    z-index: 2; /* Agar video ada di depan */
+/* Update: Border Transparan Putih (KWT & Card Umum) */
+body.dark-mode .card, 
+body.dark-mode .mode-card { 
+    background-color: #2d2d2d; 
+    color: #fff; 
+    border: 1px solid rgba(255, 255, 255, 0.2) !important; /* Border kaca */
 }
 
-/* Kotak hiasan di belakang video */
-.video-decoration {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    width: 100%;
-    height: 100%;
-    background-color: #198754; /* Warna Success (Hijau) */
-    opacity: 0.2; /* Transparan */
-    border-radius: 1rem;
-    z-index: 1; /* Di belakang video */
+body.dark-mode .text-secondary, 
+body.dark-mode .text-muted, 
+body.dark-mode .mode-text { 
+    color: #b0b0b0 !important; 
 }
 
-/* Aksen titik-titik (opsional, biar manis) */
-.dots-decoration {
-    position: absolute;
-    bottom: -30px;
-    left: -30px;
-    color: #ffc107; /* Warna Kuning */
-    font-size: 2rem;
-    z-index: 0;
+body.dark-mode .mode-icon { 
+    color: #bbb !important; 
+}
+
+body.dark-mode .navbar { 
+    border-bottom: 1px solid #333; 
+}
+
+/* Update: Border Transparan Putih (Karang Taruna/PKK/Warna-warni) */
+body.dark-mode .mode-card-dark { 
+    border: 1px solid rgba(255, 255, 255, 0.2) !important; /* Border kaca */
+}
+
+body.dark-mode .stat-box { 
+    background: rgba(0, 0, 0, 0.2); 
+    border-color: rgba(255, 255, 255, 0.05); 
 }
